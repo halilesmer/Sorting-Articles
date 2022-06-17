@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function Articles({ articles, sortedArticles }) {
+function Articles({  sortedArticles }) {
     console.log("sortedArticles: ", sortedArticles);
     const [upvotes, setUpvotes] = useState(sortedArticles)
     const [sortUpvotes, setSortUpvotes] = useState(true)
