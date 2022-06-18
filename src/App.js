@@ -7,13 +7,23 @@ import Articles from "./components/Articles";
 const title = "Sorting Articles";
 
 function App({ articles }) {
-  const [sortedArticles, setsortedArticles] = useState(articles);
+
+
+
+  const [sortedArticles, setsortedArticles] = useState(articles)
   // const [article, setArticle] = useState(articles);
-  const [sortUpvotes, setSortUpvotes] = useState(true);
+  const [sortUpvotes, setSortUpvotes] = useState(false);
+  const [t, setT] = useState(true);
+
 const [sortDate, setSortDate] = useState(true);
 
   const onClickHandleUpvotes = () => {
+
+
     setSortUpvotes(!sortUpvotes);
+
+
+
     return sortUpvotes === true
       ? setsortedArticles(
           articles.sort((a, b) => (a.upvotes > b.upvotes ? -1 : 1))

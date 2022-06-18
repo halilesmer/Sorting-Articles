@@ -1,12 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function Articles({  sortedArticles }) {
-    console.log("sortedArticles: ", sortedArticles);
-    const [upvotes, setUpvotes] = useState(sortedArticles)
-    const [sortUpvotes, setSortUpvotes] = useState(true)
 
+// the default order is descended
+const [defaultSorting, setDefaultSorting] = useState()
+useEffect(() => {
+    setDefaultSorting(sortedArticles.sort((a, b) => (a.upvotes > b.upvotes ? -1 : 1)))
+  }, [])
+  
+  
+  
+  // useEffect(() => {
+//   setNewSortedArticles(sortedArticles.sort((a, b) => (a.upvotes > b.upvotes ? -1 : 1)))
+
+// }, [])
 
   
+console.log("sortedArticles: ", sortedArticles);
 
     return (
         <div className="card w-50 mx-auto">
@@ -19,7 +29,7 @@ function Articles({  sortedArticles }) {
                     </tr>
                 </thead>
                 <tbody>
-                    {sortedArticles.map((article, index) => {
+                    {sortedArticles && sortedArticles.map((article, index) => {
                         return (
                             <>
                                 <tr data-testid="article" key={index}>
