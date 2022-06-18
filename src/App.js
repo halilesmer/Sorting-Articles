@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./App.css";
 import "h8k-components";
 
@@ -7,49 +7,46 @@ import Articles from "./components/Articles";
 const title = "Sorting Articles";
 
 function App({ articles }) {
-
-
-
-  const [sortedArticles, setsortedArticles] = useState(articles)
-  // const [article, setArticle] = useState(articles);
   const [sortUpvotes, setSortUpvotes] = useState(false);
-  const [t, setT] = useState(true);
+  const [sortDate, setSortDate] = useState(true);
+  const [sortedArticles, setsortedArticles] = useState(articles);
+  //why this doesn't work???
+  // const [sortedArticles, setsortedArticles] = useState(
+  //   articles.sort((a, b) => (a.upvotes > b.upvotes ? -1 : 1)))
 
-const [sortDate, setSortDate] = useState(true);
+
+// the default order is descended ------
+  const [defaultSorting, setDefaultSorting] = useState()
+  useEffect(() => {
+      setDefaultSorting(sortedArticles.sort((a, b) => (a.upvotes > b.upvotes ? -1 : 1)))
+    }, [])
+
+
 
   const onClickHandleUpvotes = () => {
-
-
     setSortUpvotes(!sortUpvotes);
-
-
-
     return sortUpvotes === true
       ? setsortedArticles(
-          articles.sort((a, b) => (a.upvotes > b.upvotes ? -1 : 1))
-        )
+        articles.sort((a, b) => (a.upvotes > b.upvotes ? -1 : 1))
+      )
       : setsortedArticles(
-          articles.sort((a, b) => (a.upvotes > b.upvotes ? 1 : -1))
-        );
+        articles.sort((a, b) => (a.upvotes > b.upvotes ? 1 : -1))
+      );
   };
 
   const onClickHandleMostRecent = () => {
-      setSortDate(!sortDate);
-      
-  return sortDate === true
-    ? setsortedArticles(
+    setSortDate(!sortDate);
+
+    return sortDate === true
+      ? setsortedArticles(
         articles.sort((a, b) => (a.date > b.date ? -1 : 1))
       )
-    : setsortedArticles(
+      : setsortedArticles(
         articles.sort((a, b) => (a.date > b.date ? 1 : -1))
       );
 
 
-    // return setsortedArticles(
-    //   articles.sort(
-    //     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-    //   )
-    // );
+
   };
 
   return (

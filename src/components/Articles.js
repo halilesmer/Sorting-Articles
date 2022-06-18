@@ -2,19 +2,6 @@ import React, { useState, useEffect } from 'react';
 
 function Articles({  sortedArticles }) {
 
-// the default order is descended
-const [defaultSorting, setDefaultSorting] = useState()
-useEffect(() => {
-    setDefaultSorting(sortedArticles.sort((a, b) => (a.upvotes > b.upvotes ? -1 : 1)))
-  }, [])
-  
-  
-  
-  // useEffect(() => {
-//   setNewSortedArticles(sortedArticles.sort((a, b) => (a.upvotes > b.upvotes ? -1 : 1)))
-
-// }, [])
-
   
 console.log("sortedArticles: ", sortedArticles);
 
